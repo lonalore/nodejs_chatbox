@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="Node.js Chatbox Menu" lan="LAN_PLUGIN__NCM_NAME" version="1.0" date="2015-02-17" compatibility="2.0" installRequired="true">
+	<author name="lonalore" url="http://lonalore.hu"/>
+	<summary lan="LAN_PLUGIN__NCM_SUMM">Node.js integration</summary>
+	<description lan="LAN_PLUGIN__NCM_DESC">This plugin implements chatbox_menu with Node.js.</description>
+	<keywords>
+		<word>chatbox</word>
+		<word>nodejs</word>
+	</keywords>
+	<category>menu</category>
+	<copyright></copyright>
+	<dependencies>
+		<plugin name='nodejs' min_version='1.0' />
+		<plugin name='chatbox_menu' min_version='1.0' />
+	</dependencies>
+</e107Plugin>
