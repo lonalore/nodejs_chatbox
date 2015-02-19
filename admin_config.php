@@ -54,11 +54,37 @@ class nodejs_chatbox_admin_ui extends e_admin_ui
 	);
 
 	protected $prefs = array(
+		'nodejs_chatbox_posts' => array(
+			'title' => LAN_AC_NODEJS_CHATBOX_02,
+			'type' => 'number',
+			'data' => 'int',
+			'tab' => 0,
+		),
+		'nodejs_chatbox_height' => array(
+			'title' => LAN_AC_NODEJS_CHATBOX_03,
+			'type' => 'number',
+			'data' => 'int',
+			'tab' => 0,
+		),
+		'nodejs_chatbox_emote' => array(
+			'title' => LAN_AC_NODEJS_CHATBOX_04,
+			'type' => 'boolean',
+			'writeParms' => 'label=yesno',
+			'data' => 'int',
+			'tab' => 0,
+		),
+		'nodejs_chatbox_mod' => array(
+			'title' => LAN_AC_NODEJS_CHATBOX_05,
+			'type' => 'userclass',
+			'data' => 'int',
+			'writeParms' => 'classlist=nobody,main,admin,classes',
+			'tab' => 0,
+		),
 	);
 
 }
 
-new nodejs_admin();
+new nodejs_chatbox_admin();
 
 require_once(e_ADMIN . "auth.php");
 e107::getAdminUI()->runPage();

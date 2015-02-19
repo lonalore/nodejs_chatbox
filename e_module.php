@@ -8,16 +8,40 @@ e107_require_once(e_PLUGIN . 'nodejs/nodejs.main.php');
 
 // Register events.
 $event = e107::getEvent();
-$event->register('cboxpost', 'nodejs_chatbox_event_cboxpost_callback');
+$event->register('nodejs_chatbox_message_insert', 'nodejs_chatbox_event_cboxpost_callback');
 
-function nodejs_chatbox_event_cboxpost_callback($edata_cb) {
-	$message = (object) array(
-		'channel' => 'nodejs_notify',
-		'broadcast' => TRUE,
-		'type' => 'chatboxMessage',
-		'callback' => 'nodejsChatboxMenu',
-		'data' => $edata_cb['cmessage'],
-	);
+function nodejs_chatbox_event_cboxpost_callback($data)
+{
+	$template = e107::getTemplate('nodejs_chatbox');
+	$sc = e107::getScBatch('nodejs_chatbox', true);
+	$tp = e107::getParser();
+	$db = e107::getDb('nodejs_chatbox');
 
-	nodejs_enqueue_message($message);
+	$query = 'SELECT nc.*, u.user_name, u.user_image FROM #nodejs_chatbox AS nc ';
+	$query .= 'LEFT JOIN #user AS u ON nc.uid = u.user_id ';
+	$query .= 'WHERE nc.id = ' . (int) $data['id'] . ' ';
+	$query .= 'ORDER BY nc.posted DESC ';
+
+	$db->gen($query);
+
+	while ($row = $db->fetch())
+	{
+		$details = $row;
+	}
+
+	if (isset($details))
+	{
+		$sc->setVars($details);
+		$html = $tp->parseTemplate($template['BODY'], true, $sc);
+
+		$message = (object) array(
+			'channel' => 'nodejs_notify',
+			'broadcast' => true,
+			'type' => 'chatboxMessage',
+			'callback' => 'nodejsChatbox',
+			'data' => $html,
+		);
+
+		nodejs_send_message($message);
+	}
 }

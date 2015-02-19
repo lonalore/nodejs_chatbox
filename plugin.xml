@@ -14,9 +14,7 @@
 	</adminLinks>
 	<pluginPrefs>
 		<pref name="nodejs_chatbox_posts">10</pref>
-		<pref name="nodejs_chatbox_wordwrap">20</pref>
-		<pref name="nodejs_chatbox_layer">0</pref>
-		<pref name="nodejs_chatbox_layer_height">200</pref>
+		<pref name="nodejs_chatbox_height">200</pref>
 		<pref name="nodejs_chatbox_emote">0</pref>
 		<pref name="nodejs_chatbox_mod">254</pref>
 	</pluginPrefs>
