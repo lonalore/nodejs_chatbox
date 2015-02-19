@@ -24,6 +24,12 @@
     });
 
     $('#nchatbox #submitmessage').click(function () {
+      $button = $(this);
+
+      // Disable button while posting.
+      $button.attr('disabled','disabled');
+
+      // Do an Ajax request to backend.
       $.ajax({
         type: "POST",
         url: $('#nchatbox').attr('action'),
@@ -33,7 +39,12 @@
         if (data.status == "error") {
           alert(data.message);
         }
+
+        // Cleanup textarea.
         $('#nchatbox textarea').val('');
+
+        // Enable button.
+        $button.removeAttr('disabled');
       });
       return false;
     });
