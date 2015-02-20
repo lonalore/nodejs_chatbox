@@ -33,7 +33,9 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 
 	function sc_form()
 	{
-		if (!USER)
+		$anonPost = e107::getPref('anon_post', true);
+
+		if (!USER && !$anonPost)
 		{
 			$link = '<a href="' . e_SIGNUP . '">' . LAN_NODEJS_CHATBOX_03 . '</a>';
 			$form = str_replace('[!LINK]', $link, LAN_NODEJS_CHATBOX_02);
@@ -43,16 +45,36 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 		$frm = e107::getForm();
 		$action = SITEURLBASE . e_PLUGIN_ABS . 'nodejs_chatbox/nodejs_chatbox.php';
 
-		$form = $frm->open('nchatbox', 'post', $action, array('class' => 'formclass'));
+		$form = $frm->open('nchatbox', 'post', $action, array(
+			'class' => 'formclass',
+		));
+
+		if (!USER && $anonPost)
+		{
+			$form .= $frm->text('nickname', '', 100, array(
+				'id' => 'ncnickname',
+				'class' => 'tbox span12',
+				'placeholder' => LAN_NODEJS_CHATBOX_10,
+			));
+		}
+
 		$form .= $frm->textarea('message', '', 2, 80, array(
 			'id' => 'ncmessage',
-			'class' => 'tbox span12'
+			'class' => 'tbox span12',
+			'placeholder' => LAN_NODEJS_CHATBOX_11,
 		));
-		$form .= $frm->button('submit', 1, 'submit', LAN_NODEJS_CHATBOX_04, array('id' => 'submitmessage'));
+
+		$form .= $frm->button('submit', 1, 'submit', LAN_NODEJS_CHATBOX_04, array(
+			'id' => 'submitmessage',
+		));
 
 		if ($this->plugPrefs['nodejs_chatbox_emote'] && e107::getPref('smiley_activate', true))
 		{
-			$form .= $frm->button('button', 1, 'button', LAN_NODEJS_CHATBOX_05, array('id' => 'showemotes'));
+			$form .= $frm->button('button', 1, 'button', LAN_NODEJS_CHATBOX_05, array(
+				'id' => 'showemotes',
+			));
+
+			// TODO: r_emote() is deprecated!
 			$form .= '<div class="well" style="display:none" id="ncemote">' . r_emote() . '</div>';
 		}
 
@@ -74,7 +96,13 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 
 	function sc_user_link()
 	{
-		return '<a href="' . e_HTTP . 'user.php?id.' . $this->var['uid'] . '">' . $this->var['user_name'] . '</a>';
+		$uid = (int) $this->var['uid'];
+
+		if ($uid === 0) {
+			return $this->var['user_name'];
+		}
+
+		return '<a href="' . e_HTTP . 'user.php?id.' . $uid . '">' . $this->var['user_name'] . '</a>';
 	}
 
 

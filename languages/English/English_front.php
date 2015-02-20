@@ -12,3 +12,6 @@ define('LAN_NODEJS_CHATBOX_05', 'Emotes');
 define('LAN_NODEJS_CHATBOX_06', 'You must be logged in to post messages!');
 define('LAN_NODEJS_CHATBOX_07', 'Message field is required!');
 define('LAN_NODEJS_CHATBOX_08', 'Message could not be saved!');
+define('LAN_NODEJS_CHATBOX_09', 'Nickname field is required!');
+define('LAN_NODEJS_CHATBOX_10', 'Your name');
+define('LAN_NODEJS_CHATBOX_11', 'Your message');

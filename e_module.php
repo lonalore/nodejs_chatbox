@@ -31,7 +31,15 @@ function nodejs_chatbox_event_cboxpost_callback($data)
 
 	if (isset($details))
 	{
-		$sc->setVars($details);
+		$converted = $details;
+		$converted['uid'] = (int) $details['uid'];
+
+		if ((int) $details['uid'] === 0) {
+			$converted['user_name'] = $details['nickname'];
+			$converted['user_image'] = '';
+		}
+
+		$sc->setVars($converted);
 		$html = $tp->parseTemplate($template['BODY'], true, $sc);
 
 		$message = (object) array(

@@ -33,12 +33,22 @@ class nodejs_chatbox
 	 */
 	function ajaxHandler()
 	{
-		if (USERID == 0)
+		if (USERID == 0 && (!isset($_POST['nickname']) || empty($_POST['nickname'])))
 		{
-			$message = array(
-				'status' => 'error',
-				'message' => LAN_NODEJS_CHATBOX_06,
-			);
+			if (!e107::getPref('anon_post', true))
+			{
+				$message = array(
+					'status' => 'error',
+					'message' => LAN_NODEJS_CHATBOX_06,
+				);
+			}
+			else
+			{
+				$message = array(
+					'status' => 'error',
+					'message' => LAN_NODEJS_CHATBOX_09,
+				);
+			}
 
 			echo nodejs_json_encode($message);
 			exit;
@@ -70,6 +80,7 @@ class nodejs_chatbox
 		$insert = array(
 			'id' => 0,
 			'uid' => USERID,
+			'nickname' => isset($_POST['nickname']) ? $tp->toDB($_POST['nickname']) : '',
 			'message' => $tp->toDB($_POST['message']),
 			'posted' => time(),
 			'status' => 1,
