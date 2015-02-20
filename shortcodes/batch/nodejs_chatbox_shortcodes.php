@@ -51,18 +51,22 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 
 		if (!USER && $anonPost)
 		{
-			$form .= '<div class="form-group">' . $frm->text('nickname', '', 100, array(
-					'id' => 'ncnickname',
-					'class' => 'form-control tbox span12',
-					'placeholder' => LAN_NODEJS_CHATBOX_10,
-				)) . '</div>';
+			$form .= '<div class="form-group">';
+			$form .= $frm->text('nickname', '', 100, array(
+				'id' => 'ncnickname',
+				'class' => 'form-control tbox span12',
+				'placeholder' => LAN_NODEJS_CHATBOX_10,
+			));
+			$form .= '</div>';
 		}
 
-		$form .= '<div class="form-group">' . $frm->textarea('message', '', 2, 80, array(
-				'id' => 'ncmessage',
-				'class' => 'form-control tbox span12',
-				'placeholder' => LAN_NODEJS_CHATBOX_11,
-			)) . '</div>';
+		$form .= '<div class="form-group">';
+		$form .= $frm->textarea('message', '', 2, 80, array(
+			'id' => 'ncmessage',
+			'class' => 'form-control tbox span12',
+			'placeholder' => LAN_NODEJS_CHATBOX_11,
+		));
+		$form .= '</div>';
 
 		$form .= '<div class="form-group">';
 
