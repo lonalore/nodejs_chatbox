@@ -4,7 +4,7 @@
       switch (message.type) {
         case 'chatboxMessage':
           var html = message.data;
-          $(html).prependTo('.nodejs-chatbox-body .media-list');
+          $(html).prependTo('.nodejs-chatbox-body .media-list').hide().fadeIn('slow');
           break;
       }
     }
