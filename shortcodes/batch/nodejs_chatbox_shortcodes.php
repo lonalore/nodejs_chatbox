@@ -51,18 +51,20 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 
 		if (!USER && $anonPost)
 		{
-			$form .= $frm->text('nickname', '', 100, array(
-				'id' => 'ncnickname',
-				'class' => 'tbox span12',
-				'placeholder' => LAN_NODEJS_CHATBOX_10,
-			));
+			$form .= '<div class="form-group">' . $frm->text('nickname', '', 100, array(
+					'id' => 'ncnickname',
+					'class' => 'form-control tbox span12',
+					'placeholder' => LAN_NODEJS_CHATBOX_10,
+				)) . '</div>';
 		}
 
-		$form .= $frm->textarea('message', '', 2, 80, array(
-			'id' => 'ncmessage',
-			'class' => 'tbox span12',
-			'placeholder' => LAN_NODEJS_CHATBOX_11,
-		));
+		$form .= '<div class="form-group">' . $frm->textarea('message', '', 2, 80, array(
+				'id' => 'ncmessage',
+				'class' => 'form-control tbox span12',
+				'placeholder' => LAN_NODEJS_CHATBOX_11,
+			)) . '</div>';
+
+		$form .= '<div class="form-group">';
 
 		$form .= $frm->button('submit', 1, 'submit', LAN_NODEJS_CHATBOX_04, array(
 			'id' => 'submitmessage',
@@ -77,6 +79,8 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 			// TODO: r_emote() is deprecated!
 			$form .= '<div class="well" style="display:none" id="ncemote">' . r_emote() . '</div>';
 		}
+
+		$form .= '</div>';
 
 		$form .= $frm->close();
 
@@ -98,7 +102,8 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 	{
 		$uid = (int) $this->var['uid'];
 
-		if ($uid === 0) {
+		if ($uid === 0)
+		{
 			return $this->var['user_name'];
 		}
 
