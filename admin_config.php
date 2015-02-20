@@ -23,7 +23,11 @@ class nodejs_chatbox_admin extends e_admin_dispatcher
 
 	protected $modes = array(
 		'main' => array(
-			'controller' => 'nodejs_chatbox_admin_ui',
+			'controller' => 'nodejs_chatbox_main_ui',
+			'path' => null,
+		),
+		'posts' => array(
+			'controller' => 'nodejs_chatbox_posts_ui',
 			'path' => null,
 		),
 	);
@@ -33,6 +37,10 @@ class nodejs_chatbox_admin extends e_admin_dispatcher
 			'caption' => LAN_AC_NODEJS_CHATBOX_01,
 			'perm' => 'P',
 		),
+		'posts/calc' => array(
+			'caption' => LAN_AC_NODEJS_CHATBOX_06,
+			'perm' => 'P',
+		),
 	);
 
 	protected $menuTitle = LAN_PLUGIN__NODEJS_CHATBOX_NAME;
@@ -40,9 +48,9 @@ class nodejs_chatbox_admin extends e_admin_dispatcher
 }
 
 /**
- * Class nodejs_chatbox_admin_ui.
+ * Class nodejs_chatbox_main_ui.
  */
-class nodejs_chatbox_admin_ui extends e_admin_ui
+class nodejs_chatbox_main_ui extends e_admin_ui
 {
 
 	protected $pluginTitle = LAN_PLUGIN__NODEJS_CHATBOX_NAME;
@@ -80,8 +88,75 @@ class nodejs_chatbox_admin_ui extends e_admin_ui
 			'writeParms' => 'classlist=nobody,main,admin,classes',
 			'tab' => 0,
 		),
+		'nodejs_chatbox_user_addon' => array(
+			'title' => LAN_AC_NODEJS_CHATBOX_09,
+			'type' => 'boolean',
+			'writeParms' => 'label=yesno',
+			'data' => 'int',
+			'tab' => 0,
+		),
 	);
+}
 
+class nodejs_chatbox_posts_ui extends e_admin_ui
+{
+
+	protected $pluginTitle = LAN_PLUGIN__NODEJS_NOTIFY_NAME;
+	protected $pluginName = "nodejs_chatbox";
+
+
+	function calcPage()
+	{
+		$mes = e107::getMessage();
+		$db = e107::getDb();
+		$db->update("user", "user_chats = 0");
+
+		$list = array();
+
+		if (e107::isInstalled("chatbox_menu"))
+		{
+			$qry = "SELECT u.user_id AS uid, count(c.cb_nick) AS count FROM #chatbox AS c
+		LEFT JOIN #user AS u ON SUBSTRING_INDEX(c.cb_nick,'.',1) = u.user_id
+		WHERE u.user_id > 0
+		GROUP BY uid";
+
+			if ($db->gen($qry))
+			{
+				while ($row = $db->fetch())
+				{
+					$list[$row['uid']] = $row['count'];
+				}
+			}
+		}
+
+		$qry = "SELECT nc.uid, count(nc.id) AS count FROM #nodejs_chatbox AS nc
+		LEFT JOIN #user AS u ON nc.uid = u.user_id
+		WHERE nc.uid > 0
+		GROUP BY nc.uid";
+
+		if ($db->gen($qry))
+		{
+			while ($row = $db->fetch())
+			{
+				if (array_key_exists($row['uid'], $list))
+				{
+					$list[$row['uid']] += $row['count'];
+				}
+				else
+				{
+					$list[$row['uid']] = $row['count'];
+				}
+			}
+		}
+
+		foreach ($list as $uid => $cnt)
+		{
+			$db->update("user", "user_chats = '{$cnt}' WHERE user_id = '{$uid}'");
+		}
+
+		$this->addTitle(LAN_AC_NODEJS_CHATBOX_07);
+		$mes->addSuccess(LAN_AC_NODEJS_CHATBOX_08);
+	}
 }
 
 new nodejs_chatbox_admin();

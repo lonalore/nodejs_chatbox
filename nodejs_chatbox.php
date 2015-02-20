@@ -88,6 +88,11 @@ class nodejs_chatbox
 
 		$result = $db->insert('nodejs_chatbox', $insert);
 
+		// If user is logged in, we update user info.
+		if (USER) {
+			$db->gen('UPDATE #user SET user_chats=user_chats+1, user_lastpost=' . $insert['posted'] . ' WHERE user_id=' . USERID);
+		}
+
 		if ($result)
 		{
 			// Get last inserted id.

@@ -17,6 +17,7 @@
 		<pref name="nodejs_chatbox_height">200</pref>
 		<pref name="nodejs_chatbox_emote">0</pref>
 		<pref name="nodejs_chatbox_mod">254</pref>
+		<pref name="nodejs_chatbox_user_addon">1</pref>
 	</pluginPrefs>
 	<dependencies>
 		<plugin name='nodejs' min_version='1.0' />
