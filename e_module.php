@@ -1,55 +1,87 @@
 <?php
 /**
+ * e107 website system
+ *
+ * Copyright (C) 2008-2013 e107 Inc (e107.org)
+ * Released under the terms and conditions of the
+ * GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+ *
  * @file
  * Register callback functions to events.
  */
 
-e107_require_once(e_PLUGIN . 'nodejs/nodejs.main.php');
-
 // Register events.
 $event = e107::getEvent();
-$event->register('nodejs_chatbox_message_insert', 'nodejs_chatbox_event_cboxpost_callback');
+$event->register('nodejs_chatbox_message_insert', 'nodejs_chatbox_event_callback');
 
-function nodejs_chatbox_event_cboxpost_callback($data)
+/**
+ * Callback function to push rendered html chatbox message to clients.
+ *
+ * @param $data
+ *  Details of message. Full database row from "nodejs_chatbox" table.
+ */
+function nodejs_chatbox_event_callback($data)
 {
+	$plugPrefs = e107::getPlugConfig('nodejs_chatbox')->getPref();
+
+	// If the selected handler is Ajax with Node.js. And nodejs plugin is
+	// installed.
+	if((int) $plugPrefs['ncb_handler'] === 2 && e107::isInstalled('nodejs'))
+	{
+		$html = nodejs_chatbox_render_message($data);
+
+		if($html)
+		{
+			e107_require_once(e_PLUGIN . 'nodejs/nodejs.main.php');
+
+			$message = (object) array(
+				'channel'   => 'nodejs_notify',
+				'broadcast' => true,
+				'type'      => 'chatboxMessage',
+				'callback'  => 'nodejsChatbox',
+				'data'      => $html,
+			);
+
+			nodejs_send_message($message);
+		}
+	}
+}
+
+/**
+ * Render HTML output of a chatbox message.
+ *
+ * @param $data
+ *  Details of message. Full database row from "nodejs_chatbox" table.
+ *
+ * @return string $html
+ *  Rendered HTML output.
+ */
+function nodejs_chatbox_render_message($data)
+{
+	$db = e107::getDb('nodejs_chatbox');
 	$template = e107::getTemplate('nodejs_chatbox');
 	$sc = e107::getScBatch('nodejs_chatbox', true);
 	$tp = e107::getParser();
-	$db = e107::getDb('nodejs_chatbox');
 
-	$query = 'SELECT nc.*, u.user_name, u.user_image FROM #nodejs_chatbox AS nc ';
-	$query .= 'LEFT JOIN #user AS u ON nc.uid = u.user_id ';
-	$query .= 'WHERE nc.id = ' . (int) $data['id'] . ' ';
-	$query .= 'ORDER BY nc.posted DESC ';
-
+	$query = 'SELECT c.*, u.user_id, u.user_name, u.user_image FROM #nodejs_chatbox AS c ';
+	$query .= 'LEFT JOIN #user AS u ON SUBSTRING_INDEX(c.ncb_nick,".",1) = u.user_id ';
+	$query .= 'WHERE c.ncb_id=' . (int) $data['ncb_id'];
 	$db->gen($query);
 
-	while ($row = $db->fetch())
+	$message = array();
+	while($row = $db->fetch())
 	{
-		$details = $row;
-	}
-
-	if (isset($details))
-	{
-		$converted = $details;
-		$converted['uid'] = (int) $details['uid'];
-
-		if ((int) $details['uid'] === 0) {
-			$converted['user_name'] = $details['nickname'];
-			$converted['user_image'] = '';
+		$message = $row;
+		if((int) $row['user_id'] === 0)
+		{
+			list($cb_uid, $cb_nick) = explode(".", $row['ncb_nick'], 2);
+			$message['user_name'] = $cb_nick;
+			$message['user_image'] = '';
 		}
-
-		$sc->setVars($converted);
-		$html = $tp->parseTemplate($template['BODY'], true, $sc);
-
-		$message = (object) array(
-			'channel' => 'nodejs_notify',
-			'broadcast' => true,
-			'type' => 'chatboxMessage',
-			'callback' => 'nodejsChatbox',
-			'data' => $html,
-		);
-
-		nodejs_send_message($message);
 	}
+
+	$sc->setVars($message);
+	$html = $tp->parseTemplate($template['menu_item'], true, $sc);
+
+	return $html;
 }

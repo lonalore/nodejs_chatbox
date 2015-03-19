@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e107Plugin name="Node.js Chatbox" lan="LAN_PLUGIN__NODEJS_CHATBOX_NAME" version="1.0" date="2015-02-17" compatibility="2.0" installRequired="true">
+<e107Plugin name="Node.js Chatbox" lan="LAN_PLUGIN_NODEJS_CHATBOX_NAME" version="2.0" date="2015-03-18" compatibility="2.0" installRequired="true">
 	<author name="lonalore" url="http://lonalore.hu"/>
-	<summary lan="LAN_PLUGIN__NODEJS_CHATBOX_SUMM">Node.js integration</summary>
-	<description lan="LAN_PLUGIN__NODEJS_CHATBOX_DESC">This plugin provides an chatbox implementation with Node.js.</description>
-	<keywords>
-		<word>chatbox</word>
-		<word>nodejs</word>
-	</keywords>
-	<category>tools</category>
-	<copyright></copyright>
+	<description lan="LAN_PLUGIN_NODEJS_CHATBOX_DESCRIPTION">Chatbox Menu</description>
+	<category>content</category>
+	<copyright>Copyright e107 Inc e107.org, Licensed under GPL (http://www.gnu.org/licenses/gpl.txt)</copyright>
 	<adminLinks>
-		<link url="admin_config.php" description="" icon="images/icon_32.png" iconSmall="images/icon_16.png" primary="true">LAN_CONFIGURE</link>
+		<link url='admin_config.php' description='LAN_CONFIGURE' icon='images/chatbox_32.png' iconSmall='images/chatbox_16.png' primary='true' >LAN_CONFIGURE</link>
 	</adminLinks>
 	<pluginPrefs>
-		<pref name="nodejs_chatbox_posts">10</pref>
-		<pref name="nodejs_chatbox_height">200</pref>
-		<pref name="nodejs_chatbox_emote">0</pref>
-		<pref name="nodejs_chatbox_mod">254</pref>
-		<pref name="nodejs_chatbox_user_addon">1</pref>
+		<pref name="ncb_posts">10</pref>
+		<pref name="ncb_wordwrap">20</pref>
+		<pref name="ncb_layer">0</pref>
+		<pref name="ncb_layer_height">200</pref>
+		<pref name="ncb_handler">0</pref>
+		<pref name="ncb_emote">0</pref>
+		<pref name="ncb_mod">254</pref>
+		<pref name="ncb_user_addon">1</pref>
+		<pref name="ncb_date_format">relative</pref>
 	</pluginPrefs>
-	<dependencies>
-		<plugin name='nodejs' min_version='1.0' />
-	</dependencies>
 </e107Plugin>

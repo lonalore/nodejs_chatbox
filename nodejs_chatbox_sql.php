@@ -1,11 +1,9 @@
-CREATE TABLE `nodejs_chatbox` (
-`id` int(10) unsigned NOT NULL auto_increment,
-`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The uid of the user.',
-`nickname` varchar(30) NOT NULL DEFAULT '' COMMENT 'Nickname for anonymous posting.',
-`message` text NOT NULL COMMENT 'Message posted by user.',
-`posted` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'The timestamp of when the user posted the message.',
-`status` tinyint(1) unsigned NOT NULL default '0' COMMENT 'Status of message. Active(1). Inactive(0).',
-UNIQUE KEY `id` (`id`),
-KEY `uid` (`uid`),
-KEY `posted` (`posted`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='Table to store chatbox messages.';
+CREATE TABLE nodejs_chatbox (
+ncb_id int(10) unsigned NOT NULL auto_increment,
+ncb_nick varchar(30) NOT NULL default '',
+ncb_message text NOT NULL,
+ncb_datestamp int(10) unsigned NOT NULL default '0',
+ncb_blocked tinyint(3) unsigned NOT NULL default '0',
+ncb_ip varchar(45) NOT NULL default '',
+PRIMARY KEY  (ncb_id)
+) ENGINE=MyISAM;
