@@ -16,24 +16,24 @@
     };
 
     $(document).ready(function () {
-        $('#nodejs_chatbox #ncb_submit').click(function () {
+        $('#nodejs-chatbox #ncb_submit').click(function () {
             $button = $(this);
 
             // Disable button while posting.
             $button.attr('disabled', 'disabled');
 
             var nickname = '';
-            if ($('#nodejs_chatbox #ncb_nickname').length) {
-                nickname = $('#nodejs_chatbox #ncb_nickname').val();
+            if ($('#nodejs-chatbox #ncb_nickname').length) {
+                nickname = $('#nodejs-chatbox #ncb_nickname').val();
             }
 
             // Do an Ajax request to backend.
             $.ajax({
                 type: "POST",
-                url: $('#nodejs_chatbox').attr('action'),
+                url: $('#nodejs-chatbox').attr('action'),
                 data: {
                     nickname: nickname,
-                    message: $('#nodejs_chatbox #ncb_message').val(),
+                    message: $('#nodejs-chatbox #ncb_message').val(),
                     ncb_sent: 1,
                     ncb_sent_ajax: 1
                 },
@@ -45,7 +45,7 @@
 
                 if (data.status == "ok") {
                     // Cleanup textarea.
-                    $('#nodejs_chatbox #ncb_message').val('');
+                    $('#nodejs-chatbox #ncb_message').val('');
                 }
 
                 // Enable button.

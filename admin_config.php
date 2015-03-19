@@ -71,7 +71,7 @@ class nodejs_chatbox_admin_main_ui extends e_admin_ui
 {
 
 	protected $pluginTitle = LAN_PLUGIN_NODEJS_CHATBOX_NAME;
-	protected $pluginName  = "chatbox_menu";
+	protected $pluginName  = "nodejs_chatbox";
 	protected $preftabs    = array(
 		LAN_NCB_ADMIN_01,
 	);

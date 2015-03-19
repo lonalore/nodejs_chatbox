@@ -12,7 +12,7 @@
 		<pref name="ncb_wordwrap">20</pref>
 		<pref name="ncb_layer">0</pref>
 		<pref name="ncb_layer_height">200</pref>
-		<pref name="ncb_handler">0</pref>
+		<pref name="ncb_handler">2</pref>
 		<pref name="ncb_emote">0</pref>
 		<pref name="ncb_mod">254</pref>
 		<pref name="ncb_user_addon">1</pref>
