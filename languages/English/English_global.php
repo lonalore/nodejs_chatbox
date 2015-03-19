@@ -1,7 +1,7 @@
 <?php
 
-define("LAN_PLUGIN_NODEJS_CHATBOX_NAME", "Nodejs Chatbox");
-define("LAN_PLUGIN_NODEJS_CHATBOX_DESCRIPTION", "Nodejs Chatbox");
+define("LAN_PLUGIN_NODEJS_CHATBOX_NAME", "Node.js Chatbox");
+define("LAN_PLUGIN_NODEJS_CHATBOX_DESCRIPTION", "Node.js Chatbox");
 define("LAN_PLUGIN_NODEJS_CHATBOX_POSTS", "Chatbox Posts");
 
 define("LAN_PLUGIN_NODEJS_CHATBOX_RSS_NAME", "Chatbox Posts");
