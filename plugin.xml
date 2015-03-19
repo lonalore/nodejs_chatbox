@@ -18,4 +18,7 @@
 		<pref name="ncb_user_addon">1</pref>
 		<pref name="ncb_date_format">relative</pref>
 	</pluginPrefs>
+	<dependencies>
+		<plugin name='nodejs' min_version='1.0' />
+	</dependencies>
 </e107Plugin>
