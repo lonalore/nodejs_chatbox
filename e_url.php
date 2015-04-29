@@ -1,5 +1,7 @@
 <?php
 /**
+ * Node.js Chatbox plugin for e107 v2.
+ *
  * @file
  * v2.x Standard  - Simple mod-rewrite module.
  */

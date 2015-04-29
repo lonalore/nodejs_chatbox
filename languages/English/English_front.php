@@ -1,5 +1,7 @@
 <?php
 /**
+ * Node.js Chatbox plugin for e107 v2.
+ *
  * @file
  * Definition of english strings for area Frontend.
  */

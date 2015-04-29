@@ -1,4 +1,10 @@
 <?php
+/**
+ * Node.js Chatbox plugin for e107 v2.
+ *
+ * @file
+ * Definition of english strings for area Admin.
+ */
 
 define("LAN_NCB_ADMIN_01", "Settings");
 define("LAN_NCB_ADMIN_02", "Chatbox posts to display");

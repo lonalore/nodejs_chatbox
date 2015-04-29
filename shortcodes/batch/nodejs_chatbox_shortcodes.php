@@ -1,12 +1,6 @@
 <?php
 /**
- * e107 website system
- *
- * Copyright (C) 2008-2013 e107 Inc (e107.org)
- * Released under the terms and conditions of the
- * GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
- *
- * Plugin - Chatbox
+ * Node.js Chatbox plugin for e107 v2.
  *
  * @file
  * Class installation to define shortcodes.
@@ -186,7 +180,7 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 		{
 			$text .= '<br />';
 			$text .= '<div style="text-align:center">';
-			$text .= '<a href="' . e_PLUGIN_ABS . 'nodejs_chatbox/nodejs_chatbox.php">' . ($this->var['moderate'] ? LAN_NCB_FRONT_17 : LAN_NCB_FRONT_18) . '</a> (' . $chat_total . ')';
+			$text .= '<a href="' . e107::url('nodejs_chatbox', 'index') . '">' . ($this->var['moderate'] ? LAN_NCB_FRONT_17 : LAN_NCB_FRONT_18) . '</a> (' . $chat_total . ')';
 			$text .= '</div>';
 		}
 

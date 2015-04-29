@@ -1,4 +1,10 @@
 <?php
+/**
+ * Node.js Chatbox plugin for e107 v2.
+ *
+ * @file
+ * Definition of english strings for area Global.
+ */
 
 define("LAN_PLUGIN_NODEJS_CHATBOX_NAME", "Node.js Chatbox");
 define("LAN_PLUGIN_NODEJS_CHATBOX_DESCRIPTION", "Node.js Chatbox");

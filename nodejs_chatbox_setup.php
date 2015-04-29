@@ -1,10 +1,6 @@
 <?php
 /**
- * e107 website system
- *
- * Copyright (c) 2008-2009 e107 Inc (e107.org)
- * Released under the terms and conditions of the
- * GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
+ * Node.js Chatbox plugin for e107 v2.
  *
  * @file
  * Custom install/uninstall/update routines.
@@ -42,14 +38,6 @@ class nodejs_chatbox_setup
 	}
 
 
-	/**
-	 * Trigger an upgrade alert or not.
-	 *
-	 * @param array $var
-	 *
-	 * @return bool
-	 *  True to trigger an upgrade alert, and false to not.
-	 */
 	function upgrade_required($var)
 	{
 	}

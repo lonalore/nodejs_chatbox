@@ -1,15 +1,15 @@
 <?php
 /**
- * e107 website system
+ * Node.js Chatbox plugin for e107 v2.
  *
- * Copyright (C) 2008-2013 e107 Inc (e107.org)
- * Released under the terms and conditions of the
- * GNU General Public License (http://www.gnu.org/licenses/gpl.txt)
- *
- * Plugin - Chatbox
+ * @file
+ * Render a page to list all chatbox messages and provide the ability to moderate.
  */
 
-require_once('../../class2.php');
+if(!defined('e107_INIT'))
+{
+	require_once('../../class2.php');
+}
 
 if(!e107::isInstalled('nodejs_chatbox'))
 {
