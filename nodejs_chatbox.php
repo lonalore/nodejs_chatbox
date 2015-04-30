@@ -60,29 +60,29 @@ class nodejs_chatbox
 	 */
 	function __construct()
 	{
-		$this->checkMenuClass();
-
 		// Get plugin preferences.
 		$this->plugPrefs = e107::getPlugConfig('nodejs_chatbox')->getPref();
 
-		// If no moderate class selected, we set a default value.
-		if(!isset($this->plugPrefs['ncb_mod']))
-		{
-			$this->plugPrefs['ncb_mod'] = e_UC_ADMIN;
+		if ($this->checkMenuClass()) {
+			// If no moderate class selected, we set a default value.
+			if(!isset($this->plugPrefs['ncb_mod']))
+			{
+				$this->plugPrefs['ncb_mod'] = e_UC_ADMIN;
+			}
+			$this->moderate = check_class($this->plugPrefs['ncb_mod']);
+
+			if(isset($_POST['moderate']) && $_POST['moderate'] && $this->moderate)
+			{
+				$this->moderateMessages();
+			}
+
+			e_QUERY ? $this->chatFrom = intval(e_QUERY) : $this->chatFrom = 0;
+			$db = e107::getDb('nodejs_chatbox');
+			$this->chatTotal = $db->count('nodejs_chatbox');
+
+			$this->getMessages();
+			$this->renderPage();
 		}
-		$this->moderate = check_class($this->plugPrefs['ncb_mod']);
-
-		if(isset($_POST['moderate']) && $_POST['moderate'] && $this->moderate)
-		{
-			$this->moderateMessages();
-		}
-
-		e_QUERY ? $this->chatFrom = intval(e_QUERY) : $this->chatFrom = 0;
-		$db = e107::getDb('nodejs_chatbox');
-		$this->chatTotal = $db->count('nodejs_chatbox');
-
-		$this->getMessages();
-		$this->renderPage();
 	}
 
 
@@ -230,7 +230,11 @@ class nodejs_chatbox
 
 			e107::getRender()->tablerender(LAN_ERROR, $mes->render());
 			unset($text);
+
+			return false;
 		}
+
+		return true;
 	}
 
 
