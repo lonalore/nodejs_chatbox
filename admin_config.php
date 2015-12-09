@@ -183,9 +183,7 @@ class nodejs_chatbox_admin_prune_ui extends e_admin_ui
 
 		$action = 'admin_config.php?mode=main&action=prefs';
 
-		$form = $frm->open('prune', 'post', $action, array(
-			'class' => 'formclass',
-		));
+		$form = $frm->open('prune', 'post', $action);
 
 		$options = array(
 			0       => '',
@@ -196,17 +194,21 @@ class nodejs_chatbox_admin_prune_ui extends e_admin_ui
 		);
 
 		$form .= '<div class="form-group">';
-		$form .= '<label for="chatbox_prune">' . LAN_NCB_ADMIN_23 . '</label>';
+		$form .= '<label class="control-label col-sm-2" for="subject">' . LAN_NCB_ADMIN_23 . '</label>';
+		$form .= '<div class="col-sm-10">';
 		$form .= $frm->select('chatbox_prune', $options, 0, array(
 			'class' => 'form-control tbox select',
 			'id'    => 'chatbox_prune',
 		));
 		$form .= '</div>';
+		$form .= '</div>';
 
 		$form .= '<div class="form-group">';
+		$form .= '<div class="col-sm-offset-2 col-sm-10">';
 		$form .= $frm->button('submit', 1, 'submit', LAN_NCB_ADMIN_22, array(
 			'id' => 'form-submit',
 		));
+		$form .= '</div>';
 		$form .= '</div>';
 
 		$form .= $frm->hidden('prune', 1);
