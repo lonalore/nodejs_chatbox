@@ -45,6 +45,12 @@ class nodejs_chatbox_e_header
 		{
 			e107::js('nodejs_chatbox', 'js/nodejs_chatbox.emote.js', 'jquery', 4);
 		}
+
+		// Only load this js, if nodejs_chatbox plugin is installed.
+		if((int) $this->plugPrefs['ncb_handler'] === 2)
+		{
+			e107::js('nodejs_chatbox', 'js/nodejs_chatbox.nodejs.js', 'jquery', 5);
+		}
 	}
 
 }

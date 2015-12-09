@@ -14,29 +14,6 @@ class nodejs_chatbox_nodejs
 {
 
 	/**
-	 * Node.js Javascript handlers.
-	 *
-	 * @return array
-	 *    The list of JavaScript handler files.
-	 */
-	public function jsHandlers()
-	{
-		$plugPrefs = e107::getPlugConfig('nodejs_chatbox')->getPref();
-
-		// Only load this js, if nodejs_chatbox plugin is installed.
-		// TODO: check that the nodejs_chatbox_menu is active on the site or not
-		if((int) $plugPrefs['ncb_handler'] === 2)
-		{
-			return array(
-				'js/nodejs_chatbox.nodejs.js',
-			);
-		}
-
-		return array();
-	}
-
-
-	/**
 	 * Node.js message handlers.
 	 *
 	 * @return array
