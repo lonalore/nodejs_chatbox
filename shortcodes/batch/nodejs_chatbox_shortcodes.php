@@ -23,6 +23,7 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 
 	function __construct()
 	{
+		parent::__construct();
 		$this->plugPrefs = e107::getPlugConfig('nodejs_chatbox')->getPref();
 	}
 
@@ -68,38 +69,38 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 		}
 
 		$form = $frm->open('nodejs_chatbox', 'post', $action, array(
-			'class' => 'formclass',
-			'id'    => 'nodejs_chatbox',
+				'class' => 'formclass',
+				'id'    => 'nodejs_chatbox',
 		));
 
 		if(!USER && $anonPost)
 		{
 			$form .= '<div class="form-group">';
 			$form .= $frm->text('nickname', '', 100, array(
-				'id'          => 'ncb_nickname',
-				'class'       => 'form-control tbox span12',
-				'placeholder' => LAN_NCB_FRONT_10,
+					'id'          => 'ncb_nickname',
+					'class'       => 'form-control tbox span12',
+					'placeholder' => LAN_NCB_FRONT_10,
 			));
 			$form .= '</div>';
 		}
 
 		$form .= '<div class="form-group">';
 		$form .= $frm->textarea('message', '', 2, 80, array(
-			'id'          => 'ncb_message',
-			'class'       => 'form-control tbox span12',
-			'placeholder' => LAN_NCB_FRONT_11,
+				'id'          => 'ncb_message',
+				'class'       => 'form-control tbox span12',
+				'placeholder' => LAN_NCB_FRONT_11,
 		));
 		$form .= '</div>';
 
 		$form .= '<div class="form-group">';
 		$form .= $frm->button('submit', 1, 'submit', LAN_NCB_FRONT_04, array(
-			'id' => 'ncb_submit',
+				'id' => 'ncb_submit',
 		));
 
 		if($this->plugPrefs['ncb_emote'] && e107::getPref('smiley_activate', true))
 		{
 			$form .= $frm->button('button', 1, 'button', LAN_NCB_FRONT_05, array(
-				'id' => 'ncb_showemotes',
+					'id' => 'ncb_showemotes',
 			));
 			// TODO: r_emote() is deprecated!
 			$form .= '<div class="well" style="display:none" id="ncb_emote">' . r_emote() . '</div>';

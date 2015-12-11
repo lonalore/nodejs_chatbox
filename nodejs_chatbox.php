@@ -167,7 +167,7 @@ class nodejs_chatbox
 				$text .= '<div class="checkbox">';
 				$text .= '<label>';
 				$text .= $frm->checkbox('delete[' . $row['ncb_id'] . ']', 1, false, array(
-					'id' => 'delete-' . $row['ncb_id'],
+						'id' => 'delete-' . $row['ncb_id'],
 				));
 				$text .= ' ' . LAN_DELETE . '</label>';
 				$text .= '</div>';
@@ -177,7 +177,7 @@ class nodejs_chatbox
 					$text .= '<div class="checkbox">';
 					$text .= '<label>';
 					$text .= $frm->checkbox('unblock[' . $row['ncb_id'] . ']', 1, false, array(
-						'id' => 'unblock-' . $row['ncb_id'],
+							'id' => 'unblock-' . $row['ncb_id'],
 					));
 					$text .= ' ' . LAN_NCB_FRONT_21 . '</label>';
 					$text .= '</div>';
@@ -187,7 +187,7 @@ class nodejs_chatbox
 					$text .= '<div class="checkbox">';
 					$text .= '<label>';
 					$text .= $frm->checkbox('block[' . $row['ncb_id'] . ']', 1, false, array(
-						'id' => 'block-' . $row['ncb_id'],
+							'id' => 'block-' . $row['ncb_id'],
 					));
 					$text .= ' ' . LAN_NCB_FRONT_22 . '</label>';
 					$text .= '</div>';
@@ -199,7 +199,7 @@ class nodejs_chatbox
 		if($this->moderate)
 		{
 			$form = $frm->open('moderate', 'post', e_SELF, array(
-				'class' => 'form-inline',
+					'class' => 'form-inline',
 			));
 			$form .= $text;
 			$form .= $frm->button('moderate', 1, 'submit', LAN_NCB_FRONT_24);
@@ -223,7 +223,7 @@ class nodejs_chatbox
 		$db->select("menus", "*", "menu_name='nodejs_chatbox_menu'");
 		$row = $db->fetch();
 
-		if(!check_class($row['menu_class']))
+		if(!check_class(vartrue($row['menu_class'], 0)))
 		{
 			$mes = e107::getMessage();
 			$mes->addError(LAN_NCB_FRONT_15);
