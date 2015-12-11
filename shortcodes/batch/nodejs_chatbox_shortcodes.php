@@ -173,7 +173,7 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 	function sc_moderate()
 	{
 		$db = e107::getDb();
-		$chat_total = $db->count('nodejs_chatbox');
+		$chat_total = (int) $db->count('nodejs_chatbox');
 		$chatbox_posts = (int) $this->plugPrefs['ncb_posts'];
 
 		$text = '';
