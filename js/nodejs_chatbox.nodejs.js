@@ -55,6 +55,10 @@
                 case 'chatboxMessage':
                     var html = message.data;
                     $(html).prependTo('#cb-wrapper .media-list').hide().fadeIn('slow');
+
+                    // Update counter.
+                    $total = $('#nodejs-chatbox-total');
+                    $total.html(parseInt($total.html()) + 1);
                     break;
             }
         }
