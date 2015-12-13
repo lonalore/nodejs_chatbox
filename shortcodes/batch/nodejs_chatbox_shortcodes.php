@@ -23,6 +23,7 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 
 	function __construct()
 	{
+		parent::__construct();
 		$this->plugPrefs = e107::getPlugConfig('nodejs_chatbox')->getPref();
 	}
 
