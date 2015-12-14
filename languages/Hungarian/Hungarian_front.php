@@ -6,7 +6,7 @@
  * Definition of hungarian strings for area Frontend.
  */
 
-define('LAN_NCB_FRONT_01', 'Chatbox');
+define('LAN_NCB_FRONT_01', 'Üzenőfal');
 define('LAN_NCB_FRONT_02', 'Üzenet küldéséhez be kell jelentkezned - amennyiben még nem regisztráltál, [!LINK] klikkelve megteheted');
 define('LAN_NCB_FRONT_03', 'ide');
 define('LAN_NCB_FRONT_04', 'Üzenet beküldése');
