@@ -1,3 +1,5 @@
+var e107 = e107 || {'settings': {}, 'behaviors': {}};
+
 (function ($) {
 
     e107.behaviors.nodejsChatbox = {

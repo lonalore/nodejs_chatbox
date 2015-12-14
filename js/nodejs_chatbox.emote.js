@@ -1,3 +1,5 @@
+var e107 = e107 || {'settings': {}, 'behaviors': {}};
+
 (function ($) {
     $(document).ready(function () {
         $('#nodejs-chatbox #ncb_message').click(function () {
