@@ -140,7 +140,12 @@ class nodejs_chatbox_shortcodes extends e_shortcode
 			return $this->var['user_name'];
 		}
 
-		return '<a href="' . e_HTTP . 'user.php?id.' . $uid . '">' . $this->var['user_name'] . '</a>';
+		// $username = vartrue($this->var['user_login'], $this->var['user_name']);
+		$username = $this->var['user_name'];
+		// TODO: use e107::url().
+		$href = e107::getUrl()->create('user/profile/view', $this->var);
+
+		return '<a href="' . $href . '">' . $username . '</a>';
 	}
 
 

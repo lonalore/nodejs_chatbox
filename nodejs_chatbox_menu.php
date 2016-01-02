@@ -149,7 +149,7 @@ class nodejs_chatbox_menu
 	{
 		$db = e107::getDb('nodejs_chatbox');
 
-		$query = 'SELECT c.*, u.user_id, u.user_name, u.user_image FROM #nodejs_chatbox AS c ';
+		$query = 'SELECT c.*, u.user_id, u.user_name, u.user_login, u.user_image FROM #nodejs_chatbox AS c ';
 		$query .= 'LEFT JOIN #user AS u ON SUBSTRING_INDEX(c.ncb_nick,".",1) = u.user_id ';
 		$query .= 'ORDER BY c.ncb_datestamp DESC ';
 		$query .= 'LIMIT 0, ' . (int) $this->plugPrefs['ncb_posts'];

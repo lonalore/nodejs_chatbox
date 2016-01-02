@@ -125,7 +125,7 @@ class nodejs_chatbox
 			}
 		}
 
-		$query = 'SELECT c.*, u.user_id, u.user_name, u.user_image FROM #nodejs_chatbox AS c ';
+		$query = 'SELECT c.*, u.user_id, u.user_name, u.user_login, u.user_image FROM #nodejs_chatbox AS c ';
 		$query .= 'LEFT JOIN #user AS u ON SUBSTRING_INDEX(c.ncb_nick,".",1) = u.user_id ';
 		$query .= 'WHERE ' . $qry_where . ' ';
 		$query .= 'ORDER BY c.ncb_datestamp DESC ';
