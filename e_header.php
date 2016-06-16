@@ -37,19 +37,19 @@ class nodejs_chatbox_e_header
 		// If the selected handler is Ajax.
 		if((int) $this->plugPrefs['ncb_handler'] === 1)
 		{
-			e107::js('nodejs_chatbox', 'js/nodejs_chatbox.ajax.js', 'jquery', 4);
+			e107::js('footer', '{e_PLUGIN}nodejs_chatbox/js/nodejs_chatbox.ajax.js', 'jquery', 4);
 		}
 
 		// If emote icons is enabled.
 		if($this->plugPrefs['ncb_emote'] && e107::getPref('smiley_activate', true))
 		{
-			e107::js('nodejs_chatbox', 'js/nodejs_chatbox.emote.js', 'jquery', 4);
+			e107::js('footer', '{e_PLUGIN}nodejs_chatbox/js/nodejs_chatbox.emote.js', 'jquery', 4);
 		}
 
 		// Only load this js, if nodejs_chatbox plugin is installed.
 		if((int) $this->plugPrefs['ncb_handler'] === 2)
 		{
-			e107::js('nodejs_chatbox', 'js/nodejs_chatbox.nodejs.js', 'jquery', 5);
+			e107::js('footer', '{e_PLUGIN}nodejs_chatbox/js/nodejs_chatbox.nodejs.js', 'jquery', 5);
 		}
 	}
 
